@@ -66,6 +66,18 @@ namespace Hopeless
             Index = index;
         }
 
+  
+
+        public Pokemon(Pokemon other)
+        {
+            this.Attacks = other.Attacks;
+            this.EVs = other.EVs;
+            this.HeldItem = other.HeldItem;
+            this.Level = other.Level;
+            this.Species = other.Species;
+        }
+
+
         public int Index { get; set; }
 
         public ushort EVs { get; set; } = 0;

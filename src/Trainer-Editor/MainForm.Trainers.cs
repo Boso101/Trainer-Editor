@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows.Forms;
 using GBAHL.Drawing;
 using GBAHL.Text;
-using Hopeless.Forms;
 
 namespace Hopeless
 {
@@ -243,6 +242,38 @@ namespace Hopeless
             //       update ini
         }
 
+        public void FillTrainerParty()
+        {
+            float PERCENT_MOD = 1.7f;
+
+            for (int i = 1; i < trainerCount; i++)
+            {
+
+                LoadTrainer(i);
+                
+                while (trainer.Party.Count < 6)
+                {
+                    Pokemon newPoke = new Pokemon(trainer.Party[0]);
+                    trainer.Party.Add(newPoke);
+                   
+                }
+
+                // Set new Levels
+                foreach(Pokemon mon in trainer.Party)
+                {
+                    int newLevel = (int ) Math.Round(mon.Level * PERCENT_MOD);
+                    mon.Level = (ushort)newLevel;
+                }
+
+                if(trainer.RequiresRepoint)
+                {
+                    ShiftParty();
+                }
+
+                SaveTrainer();
+
+            }
+        }
         void RandomizeTrainers()
         {
             // preserve current trainer
